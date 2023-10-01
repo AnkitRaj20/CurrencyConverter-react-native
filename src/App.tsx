@@ -1,4 +1,4 @@
-import { FlatList, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native'
+import { FlatList, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react';
 
 
@@ -40,6 +40,12 @@ export default function App() {
     }
   }
 
+  const clear = () => {
+    setInputValue('');
+    setResultValue('');
+    setTargetCurrency('');
+  }
+
   return (
     
       <>
@@ -56,13 +62,21 @@ export default function App() {
                  placeholder='Enter amount in rupee'
                  style={styles.rupeeText}
                 />
+                <TouchableOpacity onPress={() => clear()}>
+                  <Text style={styles.clear}>
+                    Clear
+                  </Text>
+                </TouchableOpacity>
              </View>
+
+              <View style={styles.result}>
 
              {resultValue && (
                <Text style={styles.resultTxt}>
                 {resultValue}
                </Text>
              )}
+             </View>
           </View>
 
             <View style={styles.bottomContainer}>
@@ -100,26 +114,45 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
+  result:{
+    height: 50
+  },
   resultTxt: {
     fontSize: 32,
     color: '#000000',
     fontWeight: '800',
+   
   },
   rupee: {
     marginRight: 8,
     fontSize: 22,
     color: '#000000',
     fontWeight: '800',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+   
   },
   rupeeText:{
     borderColor: '#000000',
     backgroundColor: '#ffffff',
-    borderRadius: 7
+    borderRadius: 7,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    fontSize: 18,
   },
   rupeesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-   
+  },
+  clear:{
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    fontSize: 20,
+    color: '#ffffff',
+    fontWeight: '400',
+    backgroundColor: '#ec644b',
+    marginLeft: 15,
+    borderRadius: 10
   },
   inputAmountField: {
     height: 40,
